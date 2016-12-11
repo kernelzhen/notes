@@ -38,3 +38,8 @@ global名切换全局默认Python版本
 
 ### uninstall命令
 卸载某个版本， 包括虚拟环境
+
+### ipython
+* `pip install ipython`
+* `pip install jupyter`
+* `jupyter notebook --ip=0.0.0.0 --no-browser`
