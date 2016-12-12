@@ -86,7 +86,7 @@ Out[29]: 'i,am,python'
 * partition
 * rpartition
 
-*split*
+** split **
 ``` python
 In [30]: s = 'I love python'
 
@@ -103,7 +103,7 @@ In [34]: 'i i i i i i i'.split(maxsplit=2) # split 从左往右分割字符串�
 Out[34]: ['i', 'i', 'i i i i i']
 ```
 
-*rsplit*
+**rsplit**
 rsplit是split从右往左的版本
 
 ``` python
