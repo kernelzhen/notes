@@ -86,7 +86,7 @@ Out[29]: 'i,am,python'
 * partition
 * rpartition
 
-** split **
+**split**
 ``` python
 In [30]: s = 'I love python'
 
