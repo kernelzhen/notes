@@ -26,23 +26,25 @@ re.match() # 从头匹配
 re.search() #匹配第一个
 re.findall() #将匹配到的所有内容都放到一个list里面
 ```
-* re.match()
+### re.match()
 
 ``` python
-        # 无分组
-        r = re.match("h\w+", origin)
-        print(r.group())     # 获取匹配到的所有结果
-        print(r.groups())    # 获取模型中匹配到的分组结果
-        print(r.groupdict()) # 获取模型中匹配到的分组结果
+从起始位置开始匹配，匹配成功返回一个对象，未匹配成功返回None
+ # 无分组
+r = re.match("h\w+", origin)
+print(r.group())     # 获取匹配到的所有结果
+print(r.groups())    # 获取模型中匹配到的分组结果
+print(r.groupdict()) # 获取模型中匹配到的分组结果
 
-        # 有分组
+# 有分组
 
-        # 为何要有分组？提取匹配成功的指定内容（先匹配成功全部正则，再匹配成功的局部内容提取出来）
+# 为何要有分组？提取匹配成功的指定内容（先匹配成功全部正则，再匹配成功的局部内容提取出来）
 
-        r = re.match("h(\w+).*(?P<name>\d)$", origin)
-        print(r.group())     # 获取匹配到的所有结果
-        print(r.groups())    # 获取模型中匹配到的分组结果
-        print(r.groupdict()) # 获取模型中匹配到的分组中所有执行了key的组
+r = re.match("h(\w+).*(?P<name>\d)$", origin)
+print(r.group())     # 获取匹配到的所有结果
+print(r.groups())    # 获取模型中匹配到的分组结果
+print(r.groupdict()) # 获取模型中匹配到的分组中所有执行了key的组
+
 In [108]: origin = 'hello haha bcd alex 1ge haha acd 19'
 
 In [104]: r = re.match("(?P<n1>h)(?P<n2>\w+)", origin)
@@ -55,4 +57,67 @@ In [106]: print(r.groups())
 
 In [107]: print(r.groupdict())
 {'n2': 'ello', 'n1': 'h'}
+```
+
+### search,浏览整个字符串去匹配第一个，未匹配成功返回None
+``` python
+# 无分组
+r = re.search("a\w+", origin)
+print(r.group())     # 获取匹配到的所有结果
+print(r.groups())    # 获取模型中匹配到的分组结果
+print(r.groupdict()) # 获取模型中匹配到的分组结果
+
+# 有分组
+
+r = re.search("a(\w+).*(?P<name>\d)$", origin)
+print(r.group())     # 获取匹配到的所有结果
+print(r.groups())    # 获取模型中匹配到的分组结果
+print(r.groupdict()) # 获取模型中匹配到的分组中所有执行了key的组
+
+In [113]: origin = 'hello haha bcd alex 1ge haha acd 19'
+
+In [114]: r = re.search('a\w+', origin)
+
+In [115]: print(r.group())
+aha
+
+In [116]: r = re.search('a(\w+).*(?P<name>\d)$',origin)
+
+In [117]: print(r.group())
+aha bcd alex 1ge haha acd 19
+
+In [118]: print(r.groups())
+('ha', '9')
+
+In [119]: print(r.groupdict())
+{'name': '9'}
+```
+
+### findall
+
+``` python
+# findall，获取非重复的匹配列表；如果有一个组则以列表形式返回，
+#且每一个匹配均是字符串；如果模型中有多个组，则以列表形式返回，且每一个匹配均是元祖；
+# 空的匹配也会包含在结果中
+
+# 无分组
+origin = "hello alex bcd abcd lge acd 19"
+In [124]: re.findall('a\w+', origin)
+Out[124]: ['aha', 'alex', 'aha', 'acd']
+
+# 有分组
+In [125]: re.findall('(a\w+)', origin)
+Out[125]: ['aha', 'alex', 'aha', 'acd']
+
+In [126]: re.findall('(a)(\w+)', origin)
+Out[126]: [('a', 'ha'), ('a', 'lex'), ('a', 'ha'), ('a', 'cd')]
+
+In [120]: re.findall('\d+\w\d+','a2b3c4d5')
+Out[120]: ['2b3', '4d5']
+
+In [130]: re.findall('(\dasd)+','1asd2asdp3asd98')
+Out[130]: ['2asd', '3asd']
+
+In [131]: re.findall('(\dasd)','1asd2asdp3asd98')
+Out[131]: ['1asd', '2asd', '3asd']
 ```
